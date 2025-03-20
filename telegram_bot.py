@@ -9,7 +9,7 @@ nest_asyncio.apply()
 
 # Define the start function
 async def start(update: Update, context: CallbackContext) -> None:
-    await update.message.reply_text('HI')
+    await update.message.reply_text('HI WELCOME TO THE LAST STRIP')
 
 async def main() -> None:
     # Get the bot token from the environment variable
