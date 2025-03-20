@@ -2,6 +2,10 @@ from telegram import Update
 from telegram.ext import Application, CommandHandler, CallbackContext
 import os
 import asyncio
+import nest_asyncio
+
+# Apply the nest_asyncio patch
+nest_asyncio.apply()
 
 # Define the start function
 async def start(update: Update, context: CallbackContext) -> None:
@@ -22,14 +26,4 @@ async def main() -> None:
     await application.run_polling()
 
 if __name__ == '__main__':
-    try:
-        loop = asyncio.get_running_loop()
-    except RuntimeError:  # No running event loop
-        loop = None
-
-    if loop and loop.is_running():
-        # If an event loop is already running, use it to run the main function
-        loop.create_task(main())
-    else:
-        # If no event loop is running, create a new one
-        asyncio.run(main())
+    asyncio.run(main())
