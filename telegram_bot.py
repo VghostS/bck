@@ -1,6 +1,7 @@
 from telegram import Update
 from telegram.ext import Application, CommandHandler, CallbackContext
 import os
+import asyncio
 
 # Define the start function
 async def start(update: Update, context: CallbackContext) -> None:
@@ -21,5 +22,7 @@ async def main() -> None:
     await application.run_polling()
 
 if __name__ == '__main__':
-    import asyncio
-    asyncio.run(main())
+    try:
+        asyncio.get_running_loop().run_until_complete(main())
+    except RuntimeError:  # If no running loop, create a new one
+        asyncio.run(main())
