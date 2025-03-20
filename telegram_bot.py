@@ -11,7 +11,7 @@ def EXE(update: Update, context: CallbackContext) -> None:
 
 def main() -> None:
     # Get the bot token from the environment variable
-    token = os.getenv("7777540525:AAFbd5VM_4qe6k94nTrLii4-FixCKKC4qFU")
+    token = os.getenv("TELEGRAM_TOKEN")
     if not token:
         raise ValueError("No token provided")
 
