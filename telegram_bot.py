@@ -23,6 +23,13 @@ async def main() -> None:
 
 if __name__ == '__main__':
     try:
-        asyncio.get_running_loop().run_until_complete(main())
-    except RuntimeError:  # If no running loop, create a new one
+        loop = asyncio.get_running_loop()
+    except RuntimeError:  # No running event loop
+        loop = None
+
+    if loop and loop.is_running():
+        # If an event loop is already running, use it to run the main function
+        loop.create_task(main())
+    else:
+        # If no event loop is running, create a new one
         asyncio.run(main())
