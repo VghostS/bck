@@ -22,7 +22,7 @@ async def play_game(update: Update, context: CallbackContext) -> None:
     # Send a game message
     await context.bot.send_game(
         chat_id=update.effective_chat.id,
-        game_short_name="TLS",  # This must match the short_name you set with @BotFather
+        game_short_name="TheLastStrip",  # This must match the short_name you set with @BotFather
         reply_markup=reply_markup
     )
 
