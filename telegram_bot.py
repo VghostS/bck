@@ -1,13 +1,10 @@
 from telegram import Update
-from telegram.ext import Updater, CommandHandler, CallbackContext
+from telegram.ext import Application, CommandHandler, CallbackContext
 import os
 
 # Define the start function
 def start(update: Update, context: CallbackContext) -> None:
     update.message.reply_text('HI')
-
-def EXE(update: Update, context: CallbackContext) -> None:
-    update.message.reply_text('EXE')
 
 def main() -> None:
     # Get the bot token from the environment variable
@@ -15,19 +12,13 @@ def main() -> None:
     if not token:
         raise ValueError("No token provided")
 
-    updater = Updater(token)
-
-    # Get the dispatcher to register handlers
-    dispatcher = updater.dispatcher
+    application = Application.builder().token(token).build()
 
     # Register the /start command handler
-    dispatcher.add_handler(CommandHandler("start", start))
+    application.add_handler(CommandHandler("start", start))
 
     # Start the Bot
-    updater.start_polling()
-
-    # Run the bot until you press Ctrl-C or the process receives SIGINT, SIGTERM or SIGABRT
-    updater.idle()
+    application.run_polling()
 
 if __name__ == '__main__':
     main()
