@@ -1,1 +1,2 @@
-worker: python telegram_bot.py & python telegram_payments.py
+web: python app.py
+worker: python bot.py
