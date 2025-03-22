@@ -6,6 +6,10 @@ import asyncio
 import nest_asyncio
 from flask import Flask, request, jsonify
 import threading
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 
 # Apply the nest_asyncio patch
 nest_asyncio.apply()
