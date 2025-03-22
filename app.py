@@ -58,7 +58,7 @@ def initiate_payment():
     return jsonify({
         "success": True, 
         "message": "Payment initiated",
-        "telegram_link": f"https://t.me/YourBotUsername?start=pay_{item_id}_{user_id}"
+        "telegram_link": f"https://t.me/TheLastStrip?start=pay_{item_id}_{user_id}"
     })
 
 @app.route('/check_payment_status', methods=['POST'])
