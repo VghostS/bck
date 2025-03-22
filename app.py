@@ -61,6 +61,22 @@ def initiate_payment():
         "telegram_link": f"https://t.me/TheLastStrip?start=pay_{item_id}_{user_id}"
     })
 
+@app.route('/update_payment_status', methods=['POST'])
+def update_payment_status():
+    data = request.json
+    user_id = data.get('user_id')
+    item_id = data.get('item_id')
+    status = data.get('status')
+    
+    if not all([user_id, item_id, status]):
+        return jsonify({"success": False, "message": "Missing required fields"}), 400
+    
+    if user_id in pending_purchases:
+        pending_purchases[user_id]["status"] = status
+        return jsonify({"success": True})
+    
+    return jsonify({"success": False, "message": "No pending purchase found"}), 404
+
 @app.route('/check_payment_status', methods=['POST'])
 def check_payment_status():
     data = request.json
